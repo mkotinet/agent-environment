@@ -11,10 +11,11 @@ echo ">> [2/5] googlechrome/modern-web-guidance-src 설치 중..."
 npx skills add googlechrome/modern-web-guidance-src -g -y --all
 
 # 2. Vercel & Addy Osmani 엔지니어링 스킬
-echo ">> [3/5] vercel-labs/agent-skills 설치 중..."
+echo ">> [3/6] vercel-labs/agent-skills 및 find-skills 설치 중..."
+npx skills add vercel-labs/skills -g -y --all
 npx skills add vercel-labs/agent-skills -g -y --all
 
-echo ">> [4/5] addyosmani/agent-skills 설치 중..."
+echo ">> [4/6] addyosmani/agent-skills 설치 중..."
 npx skills add addyosmani/agent-skills -g -y --all
 
 # 3. Public APIs 스킬
