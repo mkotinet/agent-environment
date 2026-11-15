@@ -1,0 +1,44 @@
+{
+  "mcpServers": {
+    "github": {
+      "command": "/opt/homebrew/bin/npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}",
+        "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+      }
+    },
+    "portainer": {
+      "command": "/opt/homebrew/bin/node",
+      "args": [
+        "/Users/kotinet/.gemini/mcp-servers/portainer/index.js"
+      ],
+      "env": {
+        "PORTAINER_URL": "http://djms1.iptime.org:9000",
+        "PORTAINER_API_KEY": "${PORTAINER_API_KEY}"
+      }
+    },
+    "portainer_ds920": {
+      "command": "/opt/homebrew/bin/node",
+      "args": [
+        "/Users/kotinet/.gemini/mcp-servers/portainer-ds920/index.js"
+      ],
+      "env": {
+        "PORTAINER_URL": "https://djms1.iptime.org:9101",
+        "PORTAINER_API_KEY": "${PORTAINER_DS920_API_KEY}",
+        "PORTAINER_USERNAME": "admin",
+        "PORTAINER_PASSWORD": "${PORTAINER_DS920_PASSWORD}"
+      }
+    },
+    "graphify": {
+      "command": "/opt/homebrew/bin/graphify-mcp",
+      "args": [],
+      "env": {
+        "PATH": "/opt/homebrew/bin:/Users/kotinet/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+      }
+    }
+  }
+}
