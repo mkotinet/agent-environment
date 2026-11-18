@@ -1,27 +1,30 @@
 # Google Antigravity & AI Agent 전역 스킬 종합 가이드 (`SKILLS.md`)
 
-본 문서는 Google Antigravity를 비롯한 AI 에이전트 환경에 설치되고 운영 중인 **전역 스킬(Global Skills), 플러그인 스킬(Plugin Skills), 빌트인 스킬(Built-in Skills)**의 전체 카탈로그와 5단계 순차 적용 파이프라인 가이드입니다.
+본 문서는 Google Antigravity를 비롯한 AI 에이전트 환경에 설치되고 운영 중인 **전역 스킬(Global Skills), 플러그인 스킬(Plugin Skills), 빌트인 스킬(Built-in Skills)**의 전체 카탈로그와 6단계 순차 적용 파이프라인 가이드입니다.
 
 ---
 
-## 🚀 핵심 파이프라인: 5단계 스킬 순차 적용 원칙 (Sequential Skill Application)
+## 🚀 핵심 파이프라인: 6단계 스킬 순차 적용 원칙 (Sequential Skill Application)
 
-모든 코드 개발, 기능 구현, 버그 수정, 아키텍처 분석 시 최고 수준의 품질과 최신 웹 표준을 위해 다음 5가지 단계를 **순차적으로** 적용합니다:
+모든 코드 개발, 기능 구현, 버그 수정, 리팩토링, 아키텍처 분석 시 최고 수준의 품질과 최신 웹 표준, 결함 없는 간결한 코드를 달성하기 위해 다음 6가지 단계를 **순차적으로** 적용합니다:
 
 ```
-[1단계: 최신 웹 표준 & 가이던스 우선 검토]
+[1단계: LLM 코딩 행동 강령 최우선 준수]
+   └── karpathy-guidelines (Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven)
+        ▼
+[2단계: 최신 웹 표준 & 가이던스 우선 검토]
    └── modern-web-guidance-src, modern-web-guidance, baseline-status
         ▼
-[2단계: 외부 연동 & 무료 공개 API 생태계 우선 탐색]
+[3단계: 외부 연동 & 무료 공개 API 생태계 우선 탐색]
    └── public-apis, public-api-lookup (1,400+ API 카탈로그)
         ▼
-[3단계: 엔지니어링 표준 & 모범 사례 통합]
+[4단계: 엔지니어링 표준 & 모범 사례 통합]
    └── vercel-react-best-practices, web-design-guidelines, addyosmani/agent-skills
         ▼
-[4단계: 지식 그래프 기반 구조 탐색 및 영향도 분석]
+[5단계: 지식 그래프 기반 구조 탐색 및 영향도 분석]
    └── graphify (query_graph, shortest_path, get_node / 작업 후 graphify update .)
         ▼
-[5단계: 체계적 프로세스 및 무결성 검증]
+[6단계: 체계적 프로세스 및 무결성 검증]
    └── superpowers (brainstorming ➔ writing-plans ➔ TDD ➔ verification-before-completion)
 ```
 
@@ -29,7 +32,21 @@
 
 ## 📚 스킬 카테고리별 상세 구성
 
-### 1. Google Chrome 최신 웹 표준 및 가이던스 (15종)
+### 1. Karpathy Guidelines 안드레이 카파시 코딩 행동 강령
+*출처: `szkocot/andrej-karpathy-skills` (`karpathy-guidelines`)*
+
+AI 에이전트의 대표적 실패 패턴(근거 없는 가정, 과잉 설계, 무분별한 리팩터링 등)을 원천 차단하기 위한 4대 핵심 행동 원칙입니다.
+
+| 원칙 | 핵심 규칙 및 행동 지침 |
+| :--- | :--- |
+| **Think Before Coding**<br>(코딩 전 심층 사고) | **섣부른 추정 금지, 혼란 숨김 방지, 트레이드오프 투명 공개**<br>• 가정을 명시하고 모호한 점은 시작 전에 질문<br>• 복수 해석이 가능하면 임의 선택하지 않고 사용자에게 제시<br>• 더 단순한 대안이 존재하면 적극 의견 개진<br>• 모호한 요구사항 발견 시 즉시 작업을 멈추고 확인 |
+| **Simplicity First**<br>(단순함 우선) | **최소한의 코드 작성, 과잉 설계 및 불필요한 추상화 원천 차단**<br>• 요청하지 않은 기능·확장성·설정 추가 엄격 금지<br>• 단일 사용 코드를 위한 불필요한 추상화/헬퍼 분리 배제<br>• 발생 불가능한 예외 케이스 처리 남발 금지<br>• 50줄로 작성 가능한 코드를 200줄로 부풀리지 않음 |
+| **Surgical Changes**<br>(외과수술식 정밀 수정) | **필요한 라인만 정밀 터치, 무관한 주변 코드 변경 금지**<br>• 무관한 인접 코드 포맷, 주석, 타입 임의 수정("Drive-by refactoring") 금지<br>• 기존에 잘 동작하는 코드 리팩터링 금지<br>• 자신의 수정으로 발생한 미사용 import/변수만 정리, 기존 레거시 데드코드 보존<br>• 모든 변경 라인은 사용자 요구사항에 직접 추적 가능해야 함 |
+| **Goal-Driven Execution**<br>(목표 지향적 검증) | **검증 가능한 성공 기준 수립, 검증 완료까지 반복 루프**<br>• "기능 구현" 대신 실패 테스트 작성 ➔ 통과 루프<br>• 다단계 작업 시 단계별 명확한 `verify: [check]` 계획 수립<br>• 독립적 루프로 증거 기반 자율 검증 및 완료 |
+
+---
+
+### 2. Google Chrome 최신 웹 표준 및 가이던스 (15종)
 *출처: `googlechrome/modern-web-guidance`, `googlechrome/modern-web-guidance-src`*
 
 | 스킬명 | 설명 및 주요 트리거 |
@@ -53,7 +70,7 @@
 
 ---
 
-### 2. Public APIs 무료 공개 API 카탈로그 (2종)
+### 3. Public APIs 무료 공개 API 카탈로그 (2종)
 *출처: `w020316/cautious-broccoli`, `nyldn/public-apis-skill`*
 
 | 스킬명 | 설명 및 주요 트리거 |
@@ -63,7 +80,7 @@
 
 ---
 
-### 3. Addy Osmani 시니어 엔지니어링 스킬 (25종)
+### 4. Addy Osmani 시니어 엔지니어링 스킬 (25종)
 *출처: `addyosmani/agent-skills`*
 
 | 스킬명 | 설명 및 주요 역할 |
@@ -96,7 +113,7 @@
 
 ---
 
-### 4. Vercel 엔지니어링 & 프론트엔드 최적화 (10종)
+### 5. Vercel 엔지니어링 & 프론트엔드 최적화 (10종)
 *출처: `vercel-labs/skills`, `vercel-labs/agent-skills`*
 
 | 스킬명 | 설명 및 주요 역할 |
@@ -114,7 +131,7 @@
 
 ---
 
-### 5. Superpowers 엔지니어링 프레임워크 (15종)
+### 6. Superpowers 엔지니어링 프레임워크 (15종)
 *출처: `antigravity-plugins-partners/plugin/superpowers`*
 
 | 단계 (Phase) | 스킬명 | 역할 및 핵심 규칙 |
@@ -137,7 +154,7 @@
 
 ---
 
-### 6. Google Workspace & Gmail 연동 (45종)
+### 7. Google Workspace & Gmail 연동 (45종)
 *출처: `antigravity-plugins-official/plugin/gmail`, `mkotinet/Google-Workspace-CLI-`*
 
 - **공식 Gmail 플러그인 (`gmail`)**: 메일 검색, 읽기, 답장, 라벨링, 이모지 반응 등.
@@ -148,7 +165,7 @@
 
 ---
 
-### 7. 한국어 AI 텍스트 자연화 (Humanize Korean & im-not-ai)
+### 8. 한국어 AI 텍스트 자연화 (Humanize Korean & im-not-ai)
 *출처: `epoko77-ai/im-not-ai`*
 
 | 스킬명 | 설명 및 주요 역할 |
@@ -160,7 +177,7 @@
 
 ---
 
-### 8. 지식 그래프 아키텍처 (Graphify)
+### 9. 지식 그래프 아키텍처 (Graphify)
 *출처: `graphifyy`*
 
 | 스킬 / 명령어 | 설명 및 주요 역할 |
@@ -172,7 +189,7 @@
 
 ---
 
-### 9. Google Antigravity 빌트인 전용 스킬 (11종)
+### 10. Google Antigravity 빌트인 전용 스킬 (11종)
 *출처: `~/.gemini/antigravity/builtin/skills/`*
 
 | 스킬명 | 설명 및 주요 역할 |
@@ -194,10 +211,10 @@
 
 | 작업 시나리오 | 최적의 권장 스킬 순서 |
 | :--- | :--- |
-| **신규 웹 UI / 기능 개발** | `modern-web-guidance` ➔ `brainstorming` ➔ `public-apis` ➔ `writing-plans` ➔ `test-driven-development` ➔ `verification-before-completion` |
-| **에러 해결 및 버그 수정** | `graphify query` ➔ `systematic-debugging` ➔ 최소 패치 ➔ 회귀 테스트 ➔ `verification-before-completion` |
-| **외부 서드파티 연동** | `public-api-lookup` ➔ `api-and-interface-design` ➔ `security-and-hardening` ➔ TDD |
-| **성능 최적화 및 비용 절감** | `performance-optimization` ➔ `vercel-optimize` ➔ `vercel-react-best-practices` |
-| **대규모 리팩터링 / 마이그레이션** | `query_graph` ➔ `writing-plans` ➔ `subagent-driven-development` ➔ `code-simplification` ➔ `verification-before-completion` |
+| **신규 웹 UI / 기능 개발** | `karpathy-guidelines` (사전 사고 & 단순함) ➔ `modern-web-guidance` ➔ `brainstorming` ➔ `public-apis` ➔ `writing-plans` ➔ `test-driven-development` ➔ `verification-before-completion` |
+| **에러 해결 및 버그 수정** | `karpathy-guidelines` (외과수술식 수정) ➔ `graphify query` ➔ `systematic-debugging` ➔ 최소 패치 ➔ 회귀 테스트 ➔ `verification-before-completion` |
+| **외부 서드파티 연동** | `karpathy-guidelines` ➔ `public-api-lookup` ➔ `api-and-interface-design` ➔ `security-and-hardening` ➔ TDD |
+| **성능 최적화 및 비용 절감** | `karpathy-guidelines` ➔ `performance-optimization` ➔ `vercel-optimize` ➔ `vercel-react-best-practices` |
+| **대규모 리팩터링 / 마이그레이션** | `karpathy-guidelines` ➔ `query_graph` ➔ `writing-plans` ➔ `subagent-driven-development` ➔ `code-simplification` ➔ `verification-before-completion` |
 | **AI 생성 문서/글 다듬기** | `humanize-scan` ➔ `humanize-korean` (또는 `humanize-kr`) |
 | **작업 완료 및 PR 제출** | `verification-before-completion` ➔ `code-review-and-quality` ➔ `requesting-code-review` ➔ `finishing-a-development-branch` |

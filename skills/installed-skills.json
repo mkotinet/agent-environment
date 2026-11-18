@@ -66,6 +66,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -135,6 +136,7 @@
     "source": "GoogleChrome/modern-web-guidance-src",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance-src.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -204,6 +206,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -219,6 +222,7 @@
     "source": "GoogleChrome/modern-web-guidance",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -288,6 +292,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -357,6 +362,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -426,6 +432,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -495,6 +502,7 @@
     "source": "GoogleChrome/modern-web-guidance-src",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance-src.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -564,6 +572,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -633,6 +642,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -702,6 +712,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -771,6 +782,7 @@
     "source": "vercel-labs/agent-skills",
     "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -840,6 +852,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -909,6 +922,7 @@
     "source": "GoogleChrome/modern-web-guidance-src",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance-src.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -978,6 +992,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1047,6 +1062,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1116,6 +1132,7 @@
     "source": "vercel-labs/skills",
     "sourceUrl": "https://github.com/vercel-labs/skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1185,6 +1202,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1254,6 +1272,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1323,6 +1342,7 @@
     "source": "GoogleChrome/modern-web-guidance-src",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance-src.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1392,6 +1412,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1407,6 +1428,7 @@
     "source": null,
     "sourceUrl": null,
     "sourceType": null,
+    "renamedFrom": null,
     "status": "untracked"
   },
   {
@@ -1476,6 +1498,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1545,6 +1568,23 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
+    "status": "tracked"
+  },
+  {
+    "name": "karpathy-guidelines",
+    "path": "/Users/kotinet/.agents/skills/karpathy-guidelines",
+    "scope": "global",
+    "agents": [
+      "Antigravity",
+      "Codex",
+      "Gemini CLI",
+      "GitHub Copilot"
+    ],
+    "source": "szkocot/andrej-karpathy-skills",
+    "sourceUrl": "https://github.com/szkocot/andrej-karpathy-skills.git",
+    "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1560,6 +1600,7 @@
     "source": "GoogleChrome/modern-web-guidance",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1629,6 +1670,7 @@
     "source": "GoogleChrome/modern-web-guidance-src",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance-src.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1698,6 +1740,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1767,6 +1810,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1836,6 +1880,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1905,6 +1950,7 @@
     "source": "GoogleChrome/modern-web-guidance-src",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance-src.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -1974,6 +2020,7 @@
     "source": "GoogleChrome/modern-web-guidance-src",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance-src.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2043,6 +2090,7 @@
     "source": "GoogleChrome/modern-web-guidance-src",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance-src.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2112,6 +2160,7 @@
     "source": "GoogleChrome/modern-web-guidance-src",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance-src.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2181,6 +2230,7 @@
     "source": "GoogleChrome/modern-web-guidance-src",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance-src.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2250,6 +2300,7 @@
     "source": "GoogleChrome/modern-web-guidance-src",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance-src.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2319,6 +2370,7 @@
     "source": "GoogleChrome/modern-web-guidance-src",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance-src.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2388,6 +2440,7 @@
     "source": "GoogleChrome/modern-web-guidance-src",
     "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance-src.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2457,6 +2510,7 @@
     "source": "nyldn/public-apis-skill",
     "sourceUrl": "https://github.com/nyldn/public-apis-skill.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2472,6 +2526,7 @@
     "source": "w020316/cautious-broccoli",
     "sourceUrl": "https://github.com/w020316/cautious-broccoli.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2541,6 +2596,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2610,6 +2666,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2679,6 +2736,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2748,6 +2806,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2817,6 +2876,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2886,6 +2946,7 @@
     "source": "addyosmani/agent-skills",
     "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -2955,6 +3016,7 @@
     "source": "vercel-labs/agent-skills",
     "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -3024,6 +3086,7 @@
     "source": "vercel-labs/agent-skills",
     "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -3093,6 +3156,7 @@
     "source": "vercel-labs/agent-skills",
     "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -3162,6 +3226,7 @@
     "source": "vercel-labs/agent-skills",
     "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -3231,6 +3296,7 @@
     "source": "vercel-labs/agent-skills",
     "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -3300,6 +3366,7 @@
     "source": "vercel-labs/agent-skills",
     "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -3369,6 +3436,7 @@
     "source": "vercel-labs/agent-skills",
     "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -3438,6 +3506,7 @@
     "source": "vercel-labs/agent-skills",
     "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
     "sourceType": "github",
+    "renamedFrom": null,
     "status": "tracked"
   },
   {
@@ -3450,6 +3519,7 @@
     "source": null,
     "sourceUrl": null,
     "sourceType": null,
+    "renamedFrom": null,
     "status": "untracked"
   },
   {
@@ -3463,6 +3533,7 @@
     "source": null,
     "sourceUrl": null,
     "sourceType": null,
+    "renamedFrom": null,
     "status": "untracked"
   },
   {
@@ -3476,6 +3547,7 @@
     "source": null,
     "sourceUrl": null,
     "sourceType": null,
+    "renamedFrom": null,
     "status": "untracked"
   },
   {
@@ -3488,6 +3560,7 @@
     "source": null,
     "sourceUrl": null,
     "sourceType": null,
+    "renamedFrom": null,
     "status": "untracked"
   },
   {
@@ -3501,6 +3574,7 @@
     "source": null,
     "sourceUrl": null,
     "sourceType": null,
+    "renamedFrom": null,
     "status": "untracked"
   },
   {
@@ -3514,6 +3588,7 @@
     "source": null,
     "sourceUrl": null,
     "sourceType": null,
+    "renamedFrom": null,
     "status": "untracked"
   },
   {
@@ -3527,6 +3602,7 @@
     "source": null,
     "sourceUrl": null,
     "sourceType": null,
+    "renamedFrom": null,
     "status": "untracked"
   }
 ]
