@@ -39,6 +39,18 @@
       "env": {
         "PATH": "/opt/homebrew/bin:${HOME}/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
       }
+    },
+    "kakao": {
+      "command": "/opt/homebrew/bin/uv",
+      "args": [
+        "--directory",
+        "${HOME}/.gemini/mcp-servers/kakao-mcp",
+        "run",
+        "kakao-mcp"
+      ],
+      "env": {
+        "PATH": "/opt/homebrew/bin:${HOME}/.local/share/kakao-mcp/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+      }
     }
   }
 }
