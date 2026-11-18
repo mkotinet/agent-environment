@@ -96,23 +96,27 @@ agent-environment/
 | :--- | :---: | :--- |
 | **코딩 행동 강령 (Karpathy Guidelines)** | 1종 | `karpathy-guidelines` (Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven) |
 | **지속 기억 및 규율 (AgentMemory)** | 17종 | `memory-discipline`, `remember`, `recall`, `lesson`, `recap`, `commit-context`, `handoff` 등 |
-| **최신 웹 표준 (Google Chrome)** | 15종 | `modern-web-guidance`, `baseline-status`, `browser-testing-with-devtools`, `chrome-extensions` 등 |
+| **최신 웹 표준 (Google Chrome)** | 16종 | `modern-web-guidance`, `baseline-status`, `browser-testing-with-devtools`, `chrome-extensions` 등 |
 | **무료 공개 API 카탈로그** | 2종 | `public-apis`, `public-api-lookup` (1,400+ API) |
 | **Addy Osmani 엔지니어링** | 25종 | `api-and-interface-design`, `ci-cd-and-automation`, `code-review-and-quality`, `security-and-hardening`, `test-driven-development` 등 |
 | **Vercel 프레임워크 & UI** | 10종 | `deploy-to-vercel`, `impeccable`, `vercel-composition-patterns`, `vercel-react-best-practices`, `web-design-guidelines` 등 |
-| **Superpowers 엔지니어링** | 15종 | `using-superpowers`, `brainstorming`, `writing-plans`, `systematic-debugging`, `verification-before-completion` 등 |
-| **Google Workspace & Gmail** | 45종 | `gmail`, `gws-drive`, `gws-gmail`, `gws-calendar`, `gws-sheets`, 업무 자동화 레시피 20여 종 등 |
-| **한국어 AI 텍스트 자연화** | 4종 | `humanize-korean`, `humanize-kr`, `humanize-scan`, `im-not-ai` |
+| **Superpowers 엔지니어링** | 14종 | `using-superpowers`, `brainstorming`, `writing-plans`, `systematic-debugging`, `verification-before-completion` 등 |
+| **한국어 AI 텍스트 자연화** | 6종 | `humanize-korean`, `humanize-kr`, `humanize-scan`, `im-not-ai`, `humanize`, `humanize-redo` |
 | **지식 그래프 아키텍처** | 1종 | `graphify` (AST 기반 코드베이스 지식 그래프 질의 및 분석) |
-| **Antigravity 빌트인 전용** | 11종 | `antigravity-guide`, `agy-customizations`, `automation`, `generative_ui`, `run-workflow`, `swarm` 등 |
+| **Antigravity 빌트인 전용** | 14종 | `antigravity_guide`, `agy-customizations`, `automation`, `generative_ui`, `run-workflow`, `native_swarm`, `plugin` 등 |
+| **Google Workspace & Gmail** | 96종 | 공식 `gmail`, GWS 코어 CLI 43종, 업무 자동화 레시피 42종, 전문 페르소나 10종 |
 
 ---
 
-## 🔌 MCP (Model Context Protocol) 연동 서버
+## 🔌 MCP (Model Context Protocol) 연동 서버 (5종)
 
 자세한 설정 방법은 [`mcp/README.md`](mcp/README.md)를 참고하세요.
 
 1. **`github`**: GitHub 공식 MCP (`@modelcontextprotocol/server-github`)
+2. **`portainer`**: Synology DS1019+ Portainer REST API 연동 커스텀 서버 (`mcp/servers/portainer`)
+3. **`portainer_ds920`**: Synology DS920+ Portainer REST API (HTTPS) 연동 커스텀 서버 (`mcp/servers/portainer-ds920`)
+4. **`graphify`**: 지식 그래프 AST 탐색 MCP (`graphify-mcp`)
+5. **`kakao`**: macOS 로컬 카카오톡 연동 MCP (`kakao-mcp`)
 2. **`portainer`**: Synology DS1019+ Portainer REST API 연동 커스텀 서버 (`mcp/servers/portainer`)
 3. **`portainer_ds920`**: Synology DS920+ Portainer REST API (HTTPS) 연동 커스텀 서버 (`mcp/servers/portainer-ds920`)
 4. **`graphify`**: 지식 그래프 AST 탐색 MCP (`graphify-mcp`)
