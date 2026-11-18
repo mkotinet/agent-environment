@@ -95,7 +95,7 @@
 ---
 
 ## 12. 코드 개발 및 분석 시 스킬 순차 적용 원칙 (Sequential Skill Application)
-코드 개발, 수정, 점검, 리팩토링, 기능 구현 및 아키텍처 분석 시 다음 6가지 핵심 스킬 파이프라인을 **순차적으로** 적용하여 최고 수준의 품질과 최신 웹 표준, 결함 없는 간결한 코드를 달성합니다:
+코드 개발, 수정, 점검, 리팩토링, 기능 구현 및 아키텍처 분석 시 다음 7가지 핵심 스킬 파이프라인을 **순차적으로** 적용하여 최고 수준의 품질과 최신 웹 표준, 영속적 맥락 보존 및 결함 없는 간결한 코드를 달성합니다:
 
 1. **1단계: `karpathy-guidelines` (LLM 코딩 원칙 및 행동 강령 최우선 준수)**
    * **Think Before Coding (코딩 전 심층 사고)**: 암묵적 가정(Assumption)을 엄격히 배제하고 명시화하며, 모호한 요구사항이나 다중 해석이 존재할 경우 혼자 넘겨짚지 않고 질문합니다. 단순한 대안이 있다면 먼저 제시하고 트레이드오프를 투명하게 공개합니다.
@@ -103,23 +103,28 @@
    * **Surgical Changes (외과수술식 정밀 수정)**: 버그 수정 및 기능 추가 시 요청과 무관한 주변 코드 포맷, 주석, 타입, 레거시 코드를 임의로 리팩터링("Drive-by refactoring")하지 않습니다. 오직 자신의 작업으로 인해 발생한 고아 코드(미사용 import/변수)만 정리하며, 모든 수정 라인은 반드시 사용자의 요구사항에 직접 연결되어야 합니다.
    * **Goal-Driven Execution (목표 지향적 검증)**: "알아서 잘 동작하게 만들기" 같은 모호한 실행을 지양하고, 검증 가능한 명확한 완료 조건(성공 기준)과 단계별 계획을 수립한 후 재현 테스트 및 자동화 검증 루프를 통해 증거 기반으로 완료합니다.
 
-2. **2단계: `modern-web-guidance-src` (최신 웹 표준 & 가이던스 우선 검토)**
+2. **2단계: `agentmemory` (지속 기억 기반 컨텍스트 회상 및 교훈 반영)**
+   * **Recall Before Work (작업 전 기억 회상)**: 코드 작성이나 디버깅 착수 전, 과거 유사 작업의 의사결정, 프로젝트 고유 제약사항, 해결된 Gotcha, 과거 사용자 교정 교훈(`lesson`)을 사전 회상(`recall`, `memory-discipline`)하여 동일 실수를 반복하지 않습니다.
+   * **Save at Decision Points (결정 순간 즉시 기록)**: 아키텍처 결정이 내려지거나 난해한 버그의 원인이 규명된 즉시, 이유(Reason)와 파일 경로, 구체적 개념 태그와 함께 영구 메모리에 기록(`remember`)합니다. 세션 종료 후 일괄 저장은 맥락과 이유가 유실되므로 금지합니다.
+   * **Learn from Corrections (피드백의 교훈 승격)**: 사용자가 접근법이나 코드를 교정했을 경우 단순 사실이 아닌 향후 행동 지침인 교훈(`lesson`)으로 저장하여 다음 유사 작업 시 최우선 반영합니다.
+
+3. **3단계: `modern-web-guidance-src` (최신 웹 표준 & 가이던스 우선 검토)**
    * 최신 HTML/CSS/JS 기능(Popover, Dialog, View Transitions, Container Queries, Scroll-driven Animation, Baseline 호환성 등) 구현 시 낡은 레거시 패턴 대신 최신 표준 가이던스를 검색(`npx modern-web-guidance search`) 및 적용합니다.
    * 브라우저 호환성 및 Baseline 상태를 `baseline-status` 등을 통해 사전 검증합니다.
 
-3. **3단계: `public-apis` (외부 연동 및 무료 공개 API 생태계 우선 탐색)**
+4. **4단계: `public-apis` (외부 연동 및 무료 공개 API 생태계 우선 탐색)**
    * 외부 서비스 연동, Mock/테스트 데이터, 인증(OAuth/BaaS), 결제, 지도/LBS, 날씨, AI/ML, 소셜, 미디어 처리 등 서드파티 기능이 요구되는 경우, 임의의 유료 서비스나 불완전한 ad-hoc API를 도입하기 전에 `public-apis` 카탈로그(1,400+ API) 및 `public-api-lookup` 스킬을 우선 조회합니다.
    * 인증 방식(무인증/apiKey/OAuth), HTTPS 및 CORS 지원 여부를 사전 확인하여 프론트엔드/백엔드 아키텍처에 가장 적합하고 안정적인 무료 공개 API를 선제적으로 매핑 및 통합합니다.
 
-4. **4단계: `agent-skills` (엔지니어링 표준 및 모범 사례 통합)**
+5. **5단계: `agent-skills` (엔지니어링 표준 및 모범 사례 통합)**
    * `vercel-react-best-practices`, `web-design-guidelines`, `vercel-composition-patterns` 등 프레임워크 최적화 규칙을 준수합니다.
    * `frontend-ui-engineering`, `code-review-and-quality`, `security-and-hardening`, `performance-optimization` 등 Addy Osmani 엔지니어링 스킬을 통해 아키텍처와 코드를 고도화합니다.
 
-5. **5단계: `graphify` (지식 그래프 기반 탐색 및 영향도 분석)**
+6. **6단계: `graphify` (지식 그래프 기반 탐색 및 영향도 분석)**
    * 변경 전: `query_graph`, `shortest_path`, `get_node` 등을 통해 의존성 및 결합도(God nodes)를 파악합니다.
    * 변경 후: 반드시 `graphify update .`를 실행하여 지식 그래프를 최신 상태로 유지합니다.
 
-6. **6단계: `super-powers` (체계적 프로세스 및 무결성 검증)**
+7. **7단계: `super-powers` (체계적 프로세스 및 무결성 검증)**
    * `brainstorming` 및 `writing-plans`로 선계획을 수립하고, `systematic-debugging` 및 `test-driven-development`로 구현합니다.
    * 최종 완료 전 `verification-before-completion`을 필수로 수행하여 실제 테스트 및 런타임 결과 증거를 확인한 후 작업을 마무리합니다.
 

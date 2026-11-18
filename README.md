@@ -60,28 +60,30 @@ agent-environment/
 11. **Graphify 지식 그래프 연동 원칙 (Knowledge Graph Architecture)**:
     - 코드베이스 질의 시 `graphify query` / MCP 우선 질의 및 코드 변경 후 `graphify update .` 실행.
 12. **코드 개발 및 분석 시 스킬 순차 적용 원칙 (Sequential Skill Application)**:
-    - 6단계 핵심 스킬 파이프라인 순차 적용.
+    - 7단계 핵심 스킬 파이프라인 순차 적용.
 13. **중간매개체 레포지토리 기반 멀티 디바이스 형상 동기화 원칙 (Multi-Device Agent Environment Sync)**:
     - 환경 동기화 전용 레포지토리([agent-environment](https://github.com/mkotinet/agent-environment)) 상시 최신화 및 원클릭 복원 보장.
 
 ---
 
-## ⚡ 6단계 스킬 순차 적용 파이프라인 (Sequential Skill Application)
+## ⚡ 7단계 스킬 순차 적용 파이프라인 (Sequential Skill Application)
 
-모든 코드 작업 시 6개 핵심 스킬을 순차적으로 적용합니다:
+모든 코드 작업 시 7개 핵심 스킬을 순차적으로 적용합니다:
 
 ```
-1단계: karpathy-guidelines   --> LLM 코딩 행동 강령 최우선 준수 (Think Before Coding, Simplicity, Surgical, Goal-Driven)
+1단계: karpathy-guidelines   --> LLM 코딩 행동 강령 최우선 준수 (Think, Simplicity, Surgical, Goal-Driven)
    ▼
-2단계: modern-web-guidance-src  --> 최신 웹 표준 & 가이던스 우선 검토 (Baseline 검증)
+2단계: agentmemory           --> 지속 기억 컨텍스트 사전 회상 & 결정/교훈 영속화 (memory-discipline, recall, remember)
    ▼
-3단계: public-apis              --> 외부 연동 & 1,400+ 무료 공개 API 생태계 우선 탐색
+3단계: modern-web-guidance-src  --> 최신 웹 표준 & 가이던스 우선 검토 (Baseline 검증)
    ▼
-4단계: agent-skills             --> Vercel & Addy Osmani 엔지니어링 표준/모범 사례 통합
+4단계: public-apis              --> 외부 연동 & 1,400+ 무료 공개 API 생태계 우선 탐색
    ▼
-5단계: graphify                 --> 지식 그래프 기반 구조 탐색 및 영향도 분석
+5단계: agent-skills             --> Vercel & Addy Osmani 엔지니어링 표준/모범 사례 통합
    ▼
-6단계: super-powers             --> 브레인스토밍 -> 계획 -> TDD -> 증거 기반 완료 검증
+6단계: graphify                 --> 지식 그래프 기반 구조 탐색 및 영향도 분석
+   ▼
+7단계: super-powers             --> 브레인스토밍 -> 계획 -> TDD -> 증거 기반 완료 검증
 ```
 
 ---
@@ -93,6 +95,7 @@ agent-environment/
 | 카테고리 | 스킬 수 | 대표 스킬 |
 | :--- | :---: | :--- |
 | **코딩 행동 강령 (Karpathy Guidelines)** | 1종 | `karpathy-guidelines` (Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven) |
+| **지속 기억 및 규율 (AgentMemory)** | 17종 | `memory-discipline`, `remember`, `recall`, `lesson`, `recap`, `commit-context`, `handoff` 등 |
 | **최신 웹 표준 (Google Chrome)** | 15종 | `modern-web-guidance`, `baseline-status`, `browser-testing-with-devtools`, `chrome-extensions` 등 |
 | **무료 공개 API 카탈로그** | 2종 | `public-apis`, `public-api-lookup` (1,400+ API) |
 | **Addy Osmani 엔지니어링** | 25종 | `api-and-interface-design`, `ci-cd-and-automation`, `code-review-and-quality`, `security-and-hardening`, `test-driven-development` 등 |
