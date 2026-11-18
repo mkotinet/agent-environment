@@ -1,12 +1,12 @@
 # Google Antigravity & AI Agent 전역 스킬 및 MCP 종합 가이드 (`SKILLS.md`)
 
-본 문서는 Google Antigravity를 비롯한 AI 에이전트 환경에 연동된 **전체 5개 MCP 서버**와 **202개 에이전트 스킬**의 전체 카탈로그 및 7단계 순차 적용 파이프라인 종합 레퍼런스입니다.
+본 문서는 Google Antigravity를 비롯한 AI 에이전트 환경에 연동된 **전체 5개 MCP 서버**와 **202개 에이전트 스킬**의 전체 카탈로그 및 8단계 순차 적용 파이프라인 종합 레퍼런스입니다.
 
 ---
 
-## 🚀 핵심 파이프라인: 7단계 스킬 순차 적용 원칙 (Sequential Skill Application)
+## 🚀 핵심 파이프라인: 8단계 스킬 순차 적용 원칙 (Sequential Skill Application)
 
-모든 코드 개발, 기능 구현, 버그 수정, 리팩토링, 아키텍처 분석 시 최고 수준의 품질과 최신 웹 표준, 영속적 맥락 보존 및 결함 없는 간결한 코드를 달성하기 위해 다음 7가지 단계를 **순차적으로** 적용합니다:
+모든 코드 개발, 기능 구현, 버그 수정, 리팩토링, 아키텍처 분석 시 최고 수준의 품질과 최신 웹 표준, 영속적 맥락 보존, 최적화된 프레임워크 아키텍처 및 결함 없는 간결한 코드를 달성하기 위해 다음 8가지 단계를 **순차적으로** 적용합니다:
 
 ```
 [1단계: LLM 코딩 행동 강령 최우선 준수]
@@ -21,13 +21,16 @@
 [4단계: 외부 연동 & 무료 공개 API 생태계 우선 탐색]
    └── public-apis, public-api-lookup (1,400+ API 카탈로그)
         ▼
-[5단계: 엔지니어링 표준 & 모범 사례 통합]
-   └── vercel-react-best-practices, web-design-guidelines, addyosmani/agent-skills
+[5단계: Vercel 프레임워크 & UI/UX 최적화 필수 적용]
+   └── vercel-react-best-practices, vercel-composition-patterns, impeccable, web-design-guidelines, vercel-optimize
         ▼
-[6단계: 지식 그래프 기반 구조 탐색 및 영향도 분석]
+[6단계: 시니어 풀스택 엔지니어링 표준 통합]
+   └── addyosmani/agent-skills (api-and-interface-design, security-and-hardening, performance, TDD)
+        ▼
+[7단계: 지식 그래프 기반 구조 탐색 및 영향도 분석]
    └── graphify (query_graph, shortest_path, get_node / 작업 후 graphify update .)
         ▼
-[7단계: 체계적 프로세스 및 무결성 검증]
+[8단계: 체계적 프로세스 및 무결성 검증]
    └── superpowers (brainstorming ➔ writing-plans ➔ TDD ➔ verification-before-completion)
 ```
 
@@ -354,7 +357,7 @@
 
 | 작업 시나리오 | 최적의 권장 스킬 순서 |
 | :--- | :--- |
-| **신규 웹 UI / 기능 개발** | `karpathy-guidelines` (사전 사고 & 단순함) ➔ `agentmemory` (기억 회상) ➔ `modern-web-guidance` ➔ `brainstorming` ➔ `public-apis` ➔ `writing-plans` ➔ `test-driven-development` ➔ `remember` (결정 기록) ➔ `verification-before-completion` |
+| **신규 웹 UI / 기능 개발** | `karpathy-guidelines` (사전 사고 & 단순함) ➔ `agentmemory` (기억 회상) ➔ `modern-web-guidance` ➔ `brainstorming` ➔ `public-apis` ➔ `vercel-composition-patterns` & `impeccable` ➔ `writing-plans` ➔ `test-driven-development` ➔ `remember` (결정 기록) ➔ `verification-before-completion` |
 | **에러 해결 및 버그 수정** | `karpathy-guidelines` (외과수술식 수정) ➔ `agentmemory` (Gotcha 회상) ➔ `graphify query` ➔ `systematic-debugging` ➔ 최소 패치 ➔ `remember` (해결 원인 기록) ➔ `verification-before-completion` |
 | **외부 서드파티 연동** | `karpathy-guidelines` ➔ `agentmemory` ➔ `public-api-lookup` ➔ `api-and-interface-design` ➔ `security-and-hardening` ➔ TDD ➔ `remember` |
 | **성능 최적화 및 비용 절감** | `karpathy-guidelines` ➔ `agentmemory` ➔ `performance-optimization` ➔ `vercel-optimize` ➔ `vercel-react-best-practices` |

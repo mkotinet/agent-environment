@@ -95,7 +95,7 @@
 ---
 
 ## 12. 코드 개발 및 분석 시 스킬 순차 적용 원칙 (Sequential Skill Application)
-코드 개발, 수정, 점검, 리팩토링, 기능 구현 및 아키텍처 분석 시 다음 7가지 핵심 스킬 파이프라인을 **순차적으로** 적용하여 최고 수준의 품질과 최신 웹 표준, 영속적 맥락 보존 및 결함 없는 간결한 코드를 달성합니다:
+코드 개발, 수정, 점검, 리팩토링, 기능 구현 및 아키텍처 분석 시 다음 8가지 핵심 스킬 파이프라인을 **순차적으로** 적용하여 최고 수준의 품질과 최신 웹 표준, 영속적 맥락 보존, 최적화된 프레임워크 아키텍처 및 결함 없는 간결한 코드를 달성합니다:
 
 1. **1단계: `karpathy-guidelines` (LLM 코딩 원칙 및 행동 강령 최우선 준수)**
    * **Think Before Coding (코딩 전 심층 사고)**: 암묵적 가정(Assumption)을 엄격히 배제하고 명시화하며, 모호한 요구사항이나 다중 해석이 존재할 경우 혼자 넘겨짚지 않고 질문합니다. 단순한 대안이 있다면 먼저 제시하고 트레이드오프를 투명하게 공개합니다.
@@ -116,15 +116,23 @@
    * 외부 서비스 연동, Mock/테스트 데이터, 인증(OAuth/BaaS), 결제, 지도/LBS, 날씨, AI/ML, 소셜, 미디어 처리 등 서드파티 기능이 요구되는 경우, 임의의 유료 서비스나 불완전한 ad-hoc API를 도입하기 전에 `public-apis` 카탈로그(1,400+ API) 및 `public-api-lookup` 스킬을 우선 조회합니다.
    * 인증 방식(무인증/apiKey/OAuth), HTTPS 및 CORS 지원 여부를 사전 확인하여 프론트엔드/백엔드 아키텍처에 가장 적합하고 안정적인 무료 공개 API를 선제적으로 매핑 및 통합합니다.
 
-5. **5단계: `agent-skills` (엔지니어링 표준 및 모범 사례 통합)**
-   * `vercel-react-best-practices`, `web-design-guidelines`, `vercel-composition-patterns` 등 프레임워크 최적화 규칙을 준수합니다.
-   * `frontend-ui-engineering`, `code-review-and-quality`, `security-and-hardening`, `performance-optimization` 등 Addy Osmani 엔지니어링 스킬을 통해 아키텍처와 코드를 고도화합니다.
+5. **5단계: `vercel-framework-and-ui` (Vercel 프레임워크 & UI/UX 최적화 필수 적용)**
+   * **React/Next.js 성능 최적화 (`vercel-react-best-practices`)**: 불필요한 클라이언트 사이드 렌더링을 지양하고 서버 컴포넌트(RSC)를 우선 활용하며, 워터폴(Waterfall) 데이터 페칭 제거 및 JS 번들 크기를 최소화합니다.
+   * **컴포넌트 합성 아키텍처 (`vercel-composition-patterns`)**: 단일 컴포넌트 내 무분별한 불리언 Prop 증식(Prop Proliferation)을 엄격히 방지하고, Compound Components 및 Context 분할을 통해 유지보수성과 확장성을 확보합니다.
+   * **프로덕션 수준 UI/UX 디자인 시스템 (`impeccable`, `web-design-guidelines`)**: 아마추어 AI 생성물 특유의 엉성한 디자인을 원천 배제하고, 타이포그래피 위계, 접근성(WCAG 2.1 AA+ 대비), 정교한 간격/여백, 일관된 디자인 토큰(`DESIGN.md`)을 준수합니다.
+   * **자연스러운 뷰 트랜지션 (`vercel-react-view-transitions`)**: React `<ViewTransition>` 및 CSS View Transition을 적용하여 페이지/컴포넌트 전환 시 부드러운 네이티브 앱 수준의 인터랙션을 구현합니다.
+   * **서버리스 런타임 & 비용 최적화 (`vercel-optimize`)**: 불필요한 서버리스 함수 호출 및 빌드 시간을 줄이고, 엣지 캐싱 및 Fast Data Transfer 비용을 최적화합니다.
 
-6. **6단계: `graphify` (지식 그래프 기반 탐색 및 영향도 분석)**
+6. **6단계: `agent-skills` (Addy Osmani 시니어 풀스택 엔지니어링 표준)**
+   * `api-and-interface-design`: 모듈 경계 간 견고한 타입 계약과 안정적인 REST/GraphQL API를 설계합니다.
+   * `frontend-ui-engineering` & `code-review-and-quality`: 반응형 레이아웃 및 다축 심층 코드 리뷰를 수행합니다.
+   * `security-and-hardening` & `performance-optimization`: OWASP 보안 규칙, 입력값 검증, DB 쿼리 최적화 및 Core Web Vitals를 강화합니다.
+
+7. **7단계: `graphify` (지식 그래프 기반 탐색 및 영향도 분석)**
    * 변경 전: `query_graph`, `shortest_path`, `get_node` 등을 통해 의존성 및 결합도(God nodes)를 파악합니다.
    * 변경 후: 반드시 `graphify update .`를 실행하여 지식 그래프를 최신 상태로 유지합니다.
 
-7. **7단계: `super-powers` (체계적 프로세스 및 무결성 검증)**
+8. **8단계: `super-powers` (체계적 프로세스 및 무결성 검증)**
    * `brainstorming` 및 `writing-plans`로 선계획을 수립하고, `systematic-debugging` 및 `test-driven-development`로 구현합니다.
    * 최종 완료 전 `verification-before-completion`을 필수로 수행하여 실제 테스트 및 런타임 결과 증거를 확인한 후 작업을 마무리합니다.
 

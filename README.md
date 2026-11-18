@@ -60,15 +60,15 @@ agent-environment/
 11. **Graphify 지식 그래프 연동 원칙 (Knowledge Graph Architecture)**:
     - 코드베이스 질의 시 `graphify query` / MCP 우선 질의 및 코드 변경 후 `graphify update .` 실행.
 12. **코드 개발 및 분석 시 스킬 순차 적용 원칙 (Sequential Skill Application)**:
-    - 7단계 핵심 스킬 파이프라인 순차 적용.
+    - 8단계 핵심 스킬 파이프라인 순차 적용.
 13. **중간매개체 레포지토리 기반 멀티 디바이스 형상 동기화 원칙 (Multi-Device Agent Environment Sync)**:
     - 환경 동기화 전용 레포지토리([agent-environment](https://github.com/mkotinet/agent-environment)) 상시 최신화 및 원클릭 복원 보장.
 
 ---
 
-## ⚡ 7단계 스킬 순차 적용 파이프라인 (Sequential Skill Application)
+## ⚡ 8단계 스킬 순차 적용 파이프라인 (Sequential Skill Application)
 
-모든 코드 작업 시 7개 핵심 스킬을 순차적으로 적용합니다:
+모든 코드 작업 시 8개 핵심 스킬을 순차적으로 적용합니다:
 
 ```
 1단계: karpathy-guidelines   --> LLM 코딩 행동 강령 최우선 준수 (Think, Simplicity, Surgical, Goal-Driven)
@@ -79,11 +79,13 @@ agent-environment/
    ▼
 4단계: public-apis              --> 외부 연동 & 1,400+ 무료 공개 API 생태계 우선 탐색
    ▼
-5단계: agent-skills             --> Vercel & Addy Osmani 엔지니어링 표준/모범 사례 통합
+5단계: vercel-framework-and-ui  --> Vercel 프레임워크 & UI/UX 최적화 (성능, 컴포넌트 합성, 디자인 시스템)
    ▼
-6단계: graphify                 --> 지식 그래프 기반 구조 탐색 및 영향도 분석
+6단계: agent-skills             --> Addy Osmani 시니어 풀스택 엔지니어링 표준 통합
    ▼
-7단계: super-powers             --> 브레인스토밍 -> 계획 -> TDD -> 증거 기반 완료 검증
+7단계: graphify                 --> 지식 그래프 기반 구조 탐색 및 영향도 분석
+   ▼
+8단계: super-powers             --> 브레인스토밍 -> 계획 -> TDD -> 증거 기반 완료 검증
 ```
 
 ---
