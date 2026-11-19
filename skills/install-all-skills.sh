@@ -50,7 +50,7 @@ else
 fi
 
 # 8. Graphify 지식 그래프 도구
-echo ">> [8/8] Graphify 지식 그래프 도구 점검 중..."
+echo ">> [8/9] Graphify 지식 그래프 도구 점검 중..."
 if ! command -v graphify &> /dev/null; then
   if command -v uv &> /dev/null; then
     echo "    uv tool install graphifyy 실행..."
@@ -59,6 +59,39 @@ if ! command -v graphify &> /dev/null; then
     echo "    pip3 install graphifyy 실행..."
     pip3 install graphifyy || true
   fi
+fi
+
+# 9. MarkItDown-Excel Pro (자체 제작 고급 엑셀 전처리 & 범용 마크다운 변환기)
+echo ">> [9/9] MarkItDown-Excel Pro (고급 엑셀 전처리 & 범용 마크다운 변환기) 배포 중..."
+SKILL_SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/markitdown-excel"
+TARGET_SKILL_DIR="$HOME/.agents/skills/markitdown-excel"
+CONFIG_SKILL_LINK="$HOME/.gemini/config/skills/markitdown-excel"
+
+if [ -d "$SKILL_SRC_DIR" ]; then
+  mkdir -p "$TARGET_SKILL_DIR"
+  cp -r "$SKILL_SRC_DIR/"* "$TARGET_SKILL_DIR/"
+  mkdir -p "$HOME/.gemini/config/skills"
+  ln -sfn "$TARGET_SKILL_DIR" "$CONFIG_SKILL_LINK" 2>/dev/null || true
+  
+  # CLI 래퍼 설치
+  mkdir -p "$HOME/.local/bin"
+  cat << 'EOF' > "$HOME/.local/bin/markitdown-excel"
+#!/usr/bin/env bash
+python3 "$HOME/.agents/skills/markitdown-excel/scripts/markitdown_converter.py" "$@"
+EOF
+  chmod +x "$HOME/.local/bin/markitdown-excel"
+  chmod +x "$TARGET_SKILL_DIR/scripts/excel_preprocessor.py" 2>/dev/null || true
+  chmod +x "$TARGET_SKILL_DIR/scripts/markitdown_converter.py" 2>/dev/null || true
+
+  # 의존성 설치 (openpyxl, markitdown)
+  if command -v uv &> /dev/null; then
+    echo "    uv 기반 의존성 패키지(openpyxl, markitdown) 점검 중..."
+    uv tool install markitdown 2>/dev/null || true
+    uv pip install openpyxl 2>/dev/null || pip3 install openpyxl 2>/dev/null || true
+  elif command -v pip3 &> /dev/null; then
+    pip3 install openpyxl markitdown 2>/dev/null || true
+  fi
+  echo "    MarkItDown-Excel Pro 배포 완료!"
 fi
 
 echo "=========================================================="

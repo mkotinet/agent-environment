@@ -16,9 +16,10 @@ agent-environment/
 │   ├── ANTIGRAVITY.md               # Google Antigravity 아키텍처 및 계층 가이드
 │   └── graphify.md                  # 지식 그래프(Knowledge Graph) 우선 탐색 원칙
 ├── skills/                          # 에이전트 스킬 관리 및 가이드
-│   ├── SKILLS.md                    # 100+ 설치 스킬 종합 가이드 및 워크플로우 맵
+│   ├── SKILLS.md                    # 200+ 설치 스킬 종합 가이드 및 워크플로우 맵
 │   ├── install-all-skills.sh        # 전역 스킬 원클릭 일괄 설치 스크립트
-│   └── installed-skills.json        # 현재 머신에 설치된 전역 스킬 전체 메타데이터
+│   ├── installed-skills.json        # 현재 머신에 설치된 전역 스킬 전체 메타데이터
+│   └── markitdown-excel/            # 자체 제작 복합 엑셀 전처리 & 마크다운잇 올인원 스킬 패키지
 ├── mcp/                             # MCP (Model Context Protocol) 연동 및 서버
 │   ├── README.md                    # MCP 서버 상세 연동 가이드
 │   ├── mcp_config.template.json     # 동적 홈 디렉토리 치환 지원 MCP 마스터 템플릿

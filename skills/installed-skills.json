@@ -2358,6 +2358,22 @@
     "status": "tracked"
   },
   {
+    "name": "markitdown-excel",
+    "path": "/Users/kotinet/.agents/skills/markitdown-excel",
+    "scope": "global",
+    "agents": [
+      "Antigravity",
+      "Codex",
+      "Gemini CLI",
+      "GitHub Copilot"
+    ],
+    "source": null,
+    "sourceUrl": null,
+    "sourceType": null,
+    "renamedFrom": null,
+    "status": "untracked"
+  },
+  {
     "name": "memory-discipline",
     "path": "/Users/kotinet/.agents/skills/memory-discipline",
     "scope": "global",

@@ -31,6 +31,13 @@ if [ -d "$HOME/.gemini/mcp-servers/portainer-ds920" ]; then
   cp "$HOME/.gemini/mcp-servers/portainer-ds920/package-lock.json" "$SCRIPT_DIR/mcp/servers/portainer-ds920/" 2>/dev/null || true
 fi
 
+# 2-1. 커스텀 에이전트 스킬(markitdown-excel 등) 소스 동기화
+if [ -d "$HOME/.agents/skills/markitdown-excel" ]; then
+  echo "    커스텀 스킬 markitdown-excel 동기화 중..."
+  mkdir -p "$SCRIPT_DIR/skills/markitdown-excel"
+  cp -r "$HOME/.agents/skills/markitdown-excel/"* "$SCRIPT_DIR/skills/markitdown-excel/" 2>/dev/null || true
+fi
+
 # 3. 설치된 스킬 목록 JSON 덤프
 echo ">> [3/5] 전역 설치 스킬 목록 갱신 중..."
 npx skills ls -g --json > "$SCRIPT_DIR/skills/installed-skills.json" 2>/dev/null || true

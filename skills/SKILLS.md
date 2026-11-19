@@ -1,6 +1,6 @@
 # Google Antigravity & AI Agent 전역 스킬 및 MCP 종합 가이드 (`SKILLS.md`)
 
-본 문서는 Google Antigravity를 비롯한 AI 에이전트 환경에 연동된 **전체 5개 MCP 서버**와 **202개 에이전트 스킬**의 전체 카탈로그 및 8단계 순차 적용 파이프라인 종합 레퍼런스입니다.
+본 문서는 Google Antigravity를 비롯한 AI 에이전트 환경에 연동된 **전체 5개 MCP 서버**와 **203개 에이전트 스킬**의 전체 카탈로그 및 8단계 순차 적용 파이프라인 종합 레퍼런스입니다.
 
 ---
 
@@ -353,9 +353,21 @@
 
 ---
 
+### 12. 커스텀 자체 제작 고급 스킬 (MarkItDown-Excel Pro, 1종)
+
+Microsoft MarkItDown과 복잡한 엑셀(다중 시트, 스마트 병합 셀 해제/값 전파, 수식 및 계산값 동시 병기, 조건부 서식/셀 색상 뱃지화, 다중 테이블 분할) 전처리 엔진을 통합한 고성능 문서 변환 스킬입니다.
+
+| 스킬명 | 설명 | CLI 단축 명령어 |
+| :--- | :--- | :--- |
+| **`markitdown-excel`** | 다중 시트, 병합 셀 전파, 수식 병기(`inline`/`footnote`), 조건부 서식 뱃지화(`⚠️[경고]`, `✅[달성]`) 및 PDF/Word/PPTX 범용 변환 올인원 스킬. | `markitdown-excel <파일>` |
+
+---
+
 ## 🛠️ 작업 상황별 권장 스킬 워크플로우
 
 | 작업 시나리오 | 최적의 권장 스킬 순서 |
+| :--- | :--- |
+| **엑셀 및 비정형 문서 마크다운 분석** | `markitdown-excel` (다중 시트·병합셀·수식·조건부서식 전처리) ➔ LLM 구조적 데이터 분석 |
 | :--- | :--- |
 | **신규 웹 UI / 기능 개발** | `karpathy-guidelines` (사전 사고 & 단순함) ➔ `agentmemory` (기억 회상) ➔ `modern-web-guidance` ➔ `brainstorming` ➔ `public-apis` ➔ `vercel-composition-patterns` & `impeccable` ➔ `writing-plans` ➔ `test-driven-development` ➔ `remember` (결정 기록) ➔ `verification-before-completion` |
 | **에러 해결 및 버그 수정** | `karpathy-guidelines` (외과수술식 수정) ➔ `agentmemory` (Gotcha 회상) ➔ `graphify query` ➔ `systematic-debugging` ➔ 최소 패치 ➔ `remember` (해결 원인 기록) ➔ `verification-before-completion` |
