@@ -34,7 +34,7 @@ agent-environment/
 
 ---
 
-## 🎯 13대 공통 운영 및 개발 지침 (Common Guidelines)
+## 🎯 14대 공통 운영 및 개발 지침 (Common Guidelines)
 
 본 지침은 Synology NAS 및 관련 모든 애플리케이션 개발, 운영, 배포 시 필수적으로 준수해야 하는 공통 원칙입니다:
 
@@ -64,6 +64,8 @@ agent-environment/
     - 8단계 핵심 스킬 파이프라인 순차 적용.
 13. **중간매개체 레포지토리 기반 멀티 디바이스 형상 동기화 원칙 (Multi-Device Agent Environment Sync)**:
     - 환경 동기화 전용 레포지토리([agent-environment](https://github.com/mkotinet/agent-environment)) 상시 최신화 및 원클릭 복원 보장.
+14. **오피스·문서 첨부파일 마크다운 변환 및 토큰 최적화 원칙 (Office & PDF Token Optimization via MarkItDown-Excel)**:
+    - 엑셀, 워드, PPT, PDF 등 첨부파일 수신 시 원시 텍스트/바이너리로 토큰을 낭비하지 않고, `markitdown-excel`로 선제 변환(GFM 규격, 다중 시트, 병합 셀 전파, 수식 병기, 조건부 서식 뱃지화) 후 분석하여 컨텍스트 토큰 극대화 절감.
 
 ---
 
