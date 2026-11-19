@@ -118,10 +118,6 @@ agent-environment/
 2. **`portainer`**: Synology DS1019+ Portainer REST API 연동 커스텀 서버 (`mcp/servers/portainer`)
 3. **`portainer_ds920`**: Synology DS920+ Portainer REST API (HTTPS) 연동 커스텀 서버 (`mcp/servers/portainer-ds920`)
 4. **`graphify`**: 지식 그래프 AST 탐색 MCP (`graphify-mcp`)
-5. **`kakao`**: macOS 로컬 카카오톡 연동 MCP (`kakao-mcp`)
-2. **`portainer`**: Synology DS1019+ Portainer REST API 연동 커스텀 서버 (`mcp/servers/portainer`)
-3. **`portainer_ds920`**: Synology DS920+ Portainer REST API (HTTPS) 연동 커스텀 서버 (`mcp/servers/portainer-ds920`)
-4. **`graphify`**: 지식 그래프 AST 탐색 MCP (`graphify-mcp`)
 
 ---
 
@@ -138,9 +134,8 @@ bash setup.sh
 > **`setup.sh` 동작 과정**:
 > 1. `~/.gemini/config/GEMINI.md`, `~/Documents/GEMINI.md`, `~/Documents/AGENTS.md`에 최신 13대 지침 자동 배포
 > 2. `mcp/servers/`의 커스텀 Portainer MCP 서버를 `~/.gemini/mcp-servers/`에 배포하고 의존성 패키지 자동 설치
-> 3. macOS 환경 감지 시 `kakao-mcp` (카카오톡 로컬 연동 MCP) 복제 및 의존성 환경(`kakaocli`, `kmsg`, Python 패키지) 자동 복원
-> 4. 현재 사용자의 `$HOME` 디렉토리를 자동 감지하여 `~/.gemini/config/mcp_config.json` 템플릿 생성
-> 5. `npx skills`를 통해 50여 개 전역 스킬 및 `im-not-ai`, `graphify` 일괄 설치
+> 3. 현재 사용자의 `$HOME` 디렉토리를 자동 감지하여 `~/.gemini/config/mcp_config.json` 템플릿 생성
+> 4. `npx skills`를 통해 50여 개 전역 스킬 및 `im-not-ai`, `graphify` 일괄 설치
 
 ---
 

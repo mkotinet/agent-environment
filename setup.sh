@@ -50,21 +50,6 @@ if [ -d "$SCRIPT_DIR/mcp/servers/portainer-ds920" ]; then
   fi
 fi
 
-# 3-1. macOS 전용 KakaoTalk MCP 서버 (kakao-mcp) 배포 및 의존성 설정
-if [ "$(uname -s)" = "Darwin" ]; then
-  echo ">> [3-1/5] macOS 카카오톡 MCP(kakao-mcp) 환경 구성 중..."
-  if [ ! -d "$HOME/.gemini/mcp-servers/kakao-mcp" ]; then
-    git clone https://github.com/Jaeha0526/kakao-mcp.git "$HOME/.gemini/mcp-servers/kakao-mcp"
-  fi
-  if command -v uv &> /dev/null; then
-    (cd "$HOME/.gemini/mcp-servers/kakao-mcp" && uv sync --quiet) || true
-  fi
-  if [ ! -f "$HOME/.local/share/kakao-mcp/bin/kakaocli" ] && [ -f "$HOME/.gemini/mcp-servers/kakao-mcp/scripts/install-deps.sh" ]; then
-    echo "    kakaocli/kmsg 빌드 중..."
-    (cd "$HOME/.gemini/mcp-servers/kakao-mcp" && bash ./scripts/install-deps.sh) || true
-  fi
-fi
-
 # 4. MCP 서버 설정 템플릿 배포 (동적 홈 디렉토리 치환)
 echo ">> [4/5] MCP 서버 설정 검사 및 템플릿 생성 중..."
 if [ ! -f "$HOME/.gemini/config/mcp_config.json" ]; then

@@ -12,7 +12,6 @@
 | **`portainer`** | Synology DS1019+ 도커 컨테이너 및 스택 운영 | 로컬 커스텀 Node.js 서버 (`servers/portainer`) | `list_containers`, `inspect_container`, `start_container`, `stop_container`, `restart_container`, `list_stacks`, `deploy_stack`, `get_container_logs` |
 | **`portainer_ds920`** | Synology DS920+ 도커 컨테이너 및 스택 운영 (HTTPS) | 로컬 커스텀 Node.js 서버 (`servers/portainer-ds920`) | `list_containers`, `inspect_container`, `start_container`, `stop_container`, `restart_container`, `list_stacks`, `deploy_stack`, `get_container_logs` |
 | **`graphify`** | 지식 그래프(Knowledge Graph) AST 기반 탐색 | `graphify-mcp` 바이너리 | `query_graph`, `get_node`, `get_neighbors`, `shortest_path`, `god_nodes`, `graph_stats` |
-| **`kakao`** | macOS 로컬 카카오톡 연동 (채팅방, 메시지 읽기/검색, 전송) | `kakao-mcp` (uv 기반 Python 서버) | `kakao_list_chats`, `kakao_read_messages`, `kakao_search`, `kakao_get_attachment`, `kakao_prepare_send`, `kakao_confirm_send` |
 
 ---
 
