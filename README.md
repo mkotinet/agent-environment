@@ -42,8 +42,8 @@ agent-environment/
    - 시놀로지 NAS(Portainer) 또는 로컬 변경 발생 시 즉시 대상 레포지토리에 커밋/푸시하여 항상 최신 형상 유지 (`git pull --rebase` 선행 충돌 방지).
 2. **기술레포트 및 히스토리 필수 반영 원칙 (Documentation Principle)**:
    - 신규 구축, 장애 복구 시 `기술레포트.md` 상세 기록 및 타임라인(`제작히스토리.md`) 상시 갱신.
-3. **네트워크 및 도메인 보안 연동 원칙**:
-   - 외부 도메인(`danminlove.com`) 연동 시 NPM 역방향 프록시를 통해 HTTPS(443) 와일드카드 SSL 인증서 및 보안 설정 적용.
+3. **네트워크 및 도메인 보안 연동 및 공인 SSL 무장애 표준화 원칙 (Zero-Warning SSL)**:
+   - 외부 도메인(`danminlove.com`) 연동 시 NPM 역방향 프록시 등록과 동시에 **공인 Let's Encrypt 정식 SSL 발급 및 Nginx 키체인 주입을 원스톱으로 즉시 완결**하여 브라우저 비공개 보안 경고 원천 차단. 엄격한 `curl -v` 검증 필수.
 4. **시간대(KST) 및 일일 갱신 기준 표준화 (Timezone & Midnight Rollover)**:
    - 날짜 비교, 출석, 일일 퀘스트/퀴즈에는 UTC 단순 변환 금지, 한국 표준시(KST, Asia/Seoul) 헬퍼(`getKSTDateString()`) 공통 표준 사용.
 5. **모바일 웹앱 라이프사이클 및 백그라운드 복귀 보장 (Mobile Lifecycle)**:

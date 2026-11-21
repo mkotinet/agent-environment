@@ -25,9 +25,20 @@
 
 ---
 
-## 3. 네트워크 및 도메인 보안 연동 원칙
-* **HTTPS & Cloudflare 표준화**:
-  * 외부 도메인(`danminlove.com`) 연동 시 NPM 역방향 프록시를 통해 HTTPS(443 포트) 및 와일드카드 SSL 인증서를 적용하고, WebSocket 및 Block Exploits 보안 설정을 기본 활성화합니다.
+## 3. 네트워크 및 도메인 보안 연동 및 공인 SSL 무장애 표준화 원칙 (NPM Reverse Proxy & Zero-Warning SSL)
+* **신규 서브도메인 등록 시 원스톱(One-Stop) 공인 SSL 발급 프로세스 의무화**:
+  * 신규 앱/서비스 배포 후 NPM(Nginx Proxy Manager)에 서브도메인(`*.danminlove.com`)을 등록할 때, 단순히 프록시 호스트 등록으로 끝내지 않고 **반드시 공인 Let's Encrypt 정식 SSL 인증서 발급 및 Nginx 키체인 주입까지 원스톱으로 즉시 완결**합니다.
+* **자체 서명(Self-signed) 인증서 단독 연결 원천 금지**:
+  * `*.danminlove.com` 자체 서명 와일드카드 인증서만 연결할 경우, Cloudflare를 거치지 않는 직접 접속이나 특정 모바일 브라우저(Safari, Chrome 등)에서 "연결이 비공개로 설정되어 있지 않습니다 (`NET::ERR_CERT_AUTHORITY_INVALID`)" 보안 경고가 발생하므로 이를 단독으로 남겨두지 않습니다.
+* **표준 SSL 자동 발급 및 Nginx 키체인 주입 5대 절차**:
+  1. **NPM 호스트 등록**: Forward Hostname/IP(예: `192.168.0.96`), 포트, WebSocket Support(`allow_websocket_upgrade: true`), Block Exploits 활성화.
+  2. **ACME 챌린지 경로 보장**: 해당 가상호스트(`*.conf`)에 `include conf.d/include/letsencrypt-acme-challenge.conf;` 포함 및 `trust_forwarded_proto: T` 적용.
+  3. **공인 Certbot 정식 발급 자동화**:
+     NPM 컨테이너 내부에서 `certbot certonly --webroot -w /data/letsencrypt-acme-challenge --cert-name <도메인>_official --email minkim@danminlove.com --agree-tos --no-eff-email --non-interactive -d <도메인>`을 실행하여 공인 Let's Encrypt 정식 인증서 발급.
+  4. **가상호스트 키체인 갱신 및 Nginx 무중단 리로드**:
+     `/data/nginx/proxy_host/<ID>.conf`에 정식 발급된 공인 인증서 키체인(`/etc/letsencrypt/live/<도메인>_official/fullchain.pem`)을 주입하고 `nginx -t && nginx -s reload` 실행.
+  5. **엄격한 공인 SSL 체인 검증 의무화**:
+     작업 완료 보고 전 반드시 `curl -v https://<도메인>/` (보안 무시 `-k` 옵션 엄격히 배제) 명령어로 `SSL certificate verify ok` 및 공인 CA(ISRG / Let's Encrypt) 서명을 최종 증거 기반으로 검증한 후 사용자에게 인도합니다.
 
 ---
 
