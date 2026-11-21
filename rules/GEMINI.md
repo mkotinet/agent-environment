@@ -169,3 +169,28 @@
     2. **병합 셀 해제 및 값 전파(Smart Unmerge & Fill)**: 병합된 행/열에 부모 값을 자동 전파하여 레코드 무결성을 유지하고, 전폭 타이틀 행은 표 상단 캡션으로 승격.
     3. **수식 및 계산값 동시 병기**: 표 내 인라인 병기(`값 (fx: =SUM(...))`) 또는 각주 모드(`--formula-mode footnote`)를 활용하여 계산 결과와 산출 근거(Formula Breakdown 맵)를 투명하게 보존.
     4. **조건부 서식 및 셀 색상 텍스트화**: 셀 배경색과 조건부 서식 룰을 분석하여 `⚠️[경고]`, `🔴[위험]`, `✅[달성]`, `⚡[검토]`, `📌[강조]` 텍스트 뱃지로 변환함으로써 시각적 상태 정보를 텍스트화하여 컨텍스트에 반영.
+
+---
+
+## 15. 모바일 웹앱 PWA(Progressive Web App) 표준화 및 원스톱 설치·알림 의무화 원칙 (Mobile PWA Standard & Zero-Friction Install/Notification)
+모든 신규 웹 애플리케이션 및 모바일 웹 서비스 구축 시, 사용자가 네이티브 앱과 동일한 사용 경험을 누릴 수 있도록 다음 5대 PWA 핵심 요소를 필수적으로 기본 탑재합니다:
+
+* **1) 무캐시 Web App Manifest (`manifest.json`) & 아이콘 표준화**:
+  * `id`: `/?pwa=1`, `start_url`: `/?pwa=1`, `display: "standalone"`, `orientation: "portrait"`을 명시하여 독립 앱 창으로 구동되도록 합니다.
+  * 모바일 브라우저 캐시로 인한 설치 지연/구버전 고착을 방지하기 위해 백엔드 서빙 시 `Cache-Control: no-cache, no-store, must-revalidate` 헤더를 필수 지정합니다.
+  * 고해상도 규격 아이콘(192x192, 512x512, apple-touch-icon 180x180)을 빠짐없이 배치하고 HTML 헤더에 `<link rel="manifest" href="/manifest.json">`, `<meta name="mobile-web-app-capable" content="yes">`, `<meta name="apple-mobile-web-app-capable" content="yes">`, `<meta name="theme-color">`를 기본 등록합니다.
+* **2) 네트워크 우선(Network-First) 서비스 워커 (`sw.js`) 기본 배포**:
+  * 오프라인 또는 불안정한 통신 환경에서도 최소한의 앱 쉘(Shell)이 정상 표시되도록 캐시 전략(Network-First with Cache Fallback)을 수립합니다.
+  * 새 버전 배포 시 브라우저가 신속하게 새 리소스를 내려받을 수 있도록 서비스 워커 생명주기(`skipWaiting()`, `clients.claim()`) 및 버전별 캐시 자동 정리 로직을 내장합니다.
+  * 서비스 워커 스코프 헤더(`Service-Worker-Allowed: /`)를 보장합니다.
+* **3) `beforeinstallprompt` 최우선 캡처 & 원클릭 설치 배너/버튼 필수 제공**:
+  * 스크립트 로드 최상단에서 `window.addEventListener('beforeinstallprompt')`를 선제적으로 바인딩하여 브라우저의 기본 설치 이벤트가 유실되지 않도록 캡처합니다.
+  * 웹앱 상단에 눈에 띄는 **고정 설치 유도 배너(`[📱 홈 화면에 바로가기 앱 추가하기 📥]`)** 및 헤더 설치 버튼을 기본 배치하여, 터치 한 번으로 설치 팝업(`deferredPrompt.prompt()`)이 즉시 호출되도록 구현합니다.
+* **4) 안드로이드/iOS 브라우저별 설치 분기 가이드 완비 (`modalPwaGuide`)**:
+  * **구글 크롬(Android)**: 상단 배너 또는 주소창 우측 [설치 📥] 버튼으로 100% 독립 WebAPK 즉시 설치 지원.
+  * **삼성인터넷**: `[더보기]` ➔ `[현재 페이지 추가]` 시 단순 `[홈 화면]`(단순 북마크)이 아닌 **`👉 [앱 (App)]`**을 선택해야 네이티브 WebAPK로 등록됨을 팝업으로 명확히 안내.
+  * **네이버 웨일**: 브라우저 자체 정책상 독립 앱(WebAPK)이 아닌 웨일 뱃지 북마크로 저장되므로, 독립 창 구동 및 실시간 알림을 원할 경우 크롬 또는 삼성인터넷 사용 권장 안내 제공.
+  * **아이폰(iOS Safari)**: 하단 `[공유 ⎋]` ➔ `[홈 화면에 추가 ➕]` 3초 가이드 팝업 지원.
+* **5) 시스템 웹 알림(Web Notification & Push) 연동 기반 구축**:
+  * 중요한 공지, 가족/채팅 메시지, 긴급 알림, 일일 퀘스트/리셋 등의 이벤트를 앱이 닫힌 상태에서도 수신할 수 있도록 `Notification.requestPermission()` 권한 요청 UI(`[🔔 알림 켜기]`)를 기본 제공합니다.
+  * 권한 획득 시 서비스 워커 `showNotification` 또는 브라우저 `new Notification`을 통해 안드로이드 상단 시스템 알림바(소리/진동) 배너로 실시간 팝업되도록 설계합니다.

@@ -25,11 +25,11 @@ function getConfig() {
     if (fs.existsSync(configPath)) {
       const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
       const env = config?.mcpServers?.portainer_ds920?.env || config?.mcpServers?.["portainer-ds920"]?.env || {};
-      if (!url && env.PORTAINER_URL) url = env.PORTAINER_URL;
-      if (!apiKey && env.PORTAINER_API_KEY) apiKey = env.PORTAINER_API_KEY;
-      if (!apiKey && env.PORTAINER_PAT) apiKey = env.PORTAINER_PAT;
-      if (!username && env.PORTAINER_USERNAME) username = env.PORTAINER_USERNAME;
-      if (!password && env.PORTAINER_PASSWORD) password = env.PORTAINER_PASSWORD;
+      if (env.PORTAINER_URL) url = env.PORTAINER_URL;
+      if (env.PORTAINER_API_KEY) apiKey = env.PORTAINER_API_KEY;
+      if (env.PORTAINER_PAT) apiKey = env.PORTAINER_PAT;
+      if (env.PORTAINER_USERNAME) username = env.PORTAINER_USERNAME;
+      if (env.PORTAINER_PASSWORD) password = env.PORTAINER_PASSWORD;
     }
   } catch (e) {}
 
