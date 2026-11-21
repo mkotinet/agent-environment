@@ -194,3 +194,25 @@
 * **5) 시스템 웹 알림(Web Notification & Push) 연동 기반 구축**:
   * 중요한 공지, 가족/채팅 메시지, 긴급 알림, 일일 퀘스트/리셋 등의 이벤트를 앱이 닫힌 상태에서도 수신할 수 있도록 `Notification.requestPermission()` 권한 요청 UI(`[🔔 알림 켜기]`)를 기본 제공합니다.
   * 권한 획득 시 서비스 워커 `showNotification` 또는 브라우저 `new Notification`을 통해 안드로이드 상단 시스템 알림바(소리/진동) 배너로 실시간 팝업되도록 설계합니다.
+
+---
+
+## 16. 실시간 버전 감지·자동 캐시 갱신 및 업데이트 릴리스 보고 원칙 (Live Version Rollover & What's New Release Modal)
+모든 웹 애플리케이션 및 모바일 웹 서비스는 배포 후 사용자가 브라우저 구버전 캐시에 머무르는 현상을 방지하고 최신 개선 사항을 즉시 체감할 수 있도록 **하루퀴즈 표준 4단계 릴리스 파이프라인(버전 메타데이터 서빙 ➔ 실시간 버전 비교 ➔ 무한루프 방지 캐시 소거 및 강제 갱신 ➔ 업데이트 보고 모달 자동 표출)**을 필수로 기본 구현합니다:
+
+* **1) 버전 메타데이터 규격화 및 무캐시 서빙 (`version.json` & `/api/version`)**:
+  * 프로젝트 루트에 `version.json`을 배치하고 `{ "version": "X.Y.Z", "build": "YYYYMMDD_HHMM", "name": "앱명칭", "releaseNotes": "업데이트 요약", "features": [{ "icon": "...", "title": "...", "desc": "..." }] }` 메타데이터 규격을 항시 유지합니다.
+  * 백엔드 API(`/api/version`, `/version.json`)는 모바일 및 프록시 캐시를 차단하기 위해 `Cache-Control: no-cache, no-store, must-revalidate` 헤더로 응답합니다.
+  * HTML 헤더에 `<meta name="app-version" content="X.Y.Z">` 및 번들 스크립트 쿼리스트링(`app.js?v=X.Y.Z`)을 주입하여 클라이언트가 자신의 버전을 정확히 인지하도록 합니다.
+* **2) 시작 및 백그라운드 복귀 시 실시간 버전 감지 (`checkAppVersionUpdate`)**:
+  * 앱 최초 진입 시(`DOMContentLoaded` 후 1~1.5초 딜레이) 및 모바일 백그라운드 복귀(`visibilitychange`, `pageshow`, `focus`) 시 `fetch('/api/version?_t=' + Date.now(), { cache: 'no-store' })`를 호출하여 서버 최신 버전을 비동기 조회합니다.
+  * 세맨틱 버저닝(`isServerVersionNewer`)을 통해 서버 버전이 클라이언트 버전보다 높을 경우 즉각적인 업데이트 절차에 돌입합니다.
+* **3) 무한 루프 방지(Loop Guard) & 브라우저 캐시 소거 후 강제 갱신 (`forcePageReload`)**:
+  * 브라우저 캐시 고착으로 인한 무한 새로고침 핑퐁을 원천 방지하기 위해 `sessionStorage`에 `auto_reload_to_<serverVersion>` 플래그와 타임스탬프를 기록하여 60초 내 중복 재시도를 차단합니다.
+  * 갱신 직전 토스트 안내(`🚀 새 버전(vX.Y.Z)으로 업데이트되었습니다. 최신 화면으로 새로고침합니다...`)를 표출합니다.
+  * `caches.keys()` 순회 및 `caches.delete()`로 브라우저 CacheStorage를 소거하고, 캐시 버스팅 파라미터(`_v=X.Y.Z&_t=Date.now()`)를 붙여 `window.location.replace()`로 새 화면을 즉시 로드합니다.
+* **4) 갱신 직후 '새로운 기능 / 업데이트 보고창'(`modalWhatsNew`) 자동 팝업**:
+  * 강제 갱신 완료 후 앱 홈 화면 로드 시(`checkWhatsNewPopup`, 0.6초 딜레이) `localStorage`의 `dismissed_update_version`을 확인합니다.
+  * 현재 버전과 일치하지 않는 경우(즉, 이번 업데이트 후 처음 화면을 연 경우), **업데이트 보고창 모달(`#modalWhatsNew`)**을 화면 중앙에 자동으로 띄웁니다.
+  * 보고창에는 **새 버전 뱃지(`vX.Y.Z`), 릴리스 일시, 릴리스 노트 요약문, 핵심 변경 기능 카드 목록**을 시각적으로 일목요연하게 렌더링합니다.
+  * 사용자가 `[확인하고 계속하기]` 또는 닫기를 누르면 `localStorage.setItem('dismissed_update_version', currentVersion)`을 영구 저장하여 이후 재접속 시에는 팝업되지 않도록 제어합니다.

@@ -68,6 +68,8 @@ agent-environment/
     - 엑셀, 워드, PPT, PDF 등 첨부파일 수신 시 원시 텍스트/바이너리로 토큰을 낭비하지 않고, `markitdown-excel`로 선제 변환(GFM 규격, 다중 시트, 병합 셀 전파, 수식 병기, 조건부 서식 뱃지화) 후 분석하여 컨텍스트 토큰 극대화 절감.
 15. **모바일 웹앱 PWA(Progressive Web App) 표준화 및 원스톱 설치·알림 의무화 원칙 (Mobile PWA Standard & Zero-Friction Install/Notification)**:
     - 신규 웹앱 구축 시 무캐시 Manifest(`manifest.json`), Network-First 서비스워커(`sw.js`), `beforeinstallprompt` 최우선 캡처 & 상단 고정 설치 배너, 삼성인터넷(`[앱]` 선택)/웨일/크롬/iOS 브라우저별 분기 가이드(`modalPwaGuide`), 시스템 웹 알림(Web Notification & Push) 연동 기반을 기본 탑재하여 네이티브 앱 수준의 사용성 보장.
+16. **실시간 버전 감지·자동 캐시 갱신 및 업데이트 릴리스 보고 원칙 (Live Version Rollover & What's New Release Modal)**:
+    - 하루퀴즈 표준 4단계 릴리스 파이프라인(버전 메타데이터 무캐시 서빙 ➔ 시작/복귀 시 버전 감지 `checkAppVersionUpdate` ➔ 무한루프 방지 캐시 소거 및 강제 갱신 `forcePageReload` ➔ 업데이트 보고 모달 `modalWhatsNew` 자동 팝업)을 필수로 구현하여 구버전 고착 방지 및 개선 내역 투명 전달.
 
 ---
 
