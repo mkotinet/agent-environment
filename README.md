@@ -70,6 +70,8 @@ agent-environment/
     - 신규 웹앱 구축 시 무캐시 Manifest(`manifest.json`), Network-First 서비스워커(`sw.js`), `beforeinstallprompt` 최우선 캡처 & 상단 고정 설치 배너, 삼성인터넷(`[앱]` 선택)/웨일/크롬/iOS 브라우저별 분기 가이드(`modalPwaGuide`), 시스템 웹 알림(Web Notification & Push) 연동 기반을 기본 탑재하여 네이티브 앱 수준의 사용성 보장.
 16. **실시간 버전 감지·자동 캐시 갱신 및 업데이트 릴리스 보고 원칙 (Live Version Rollover & What's New Release Modal)**:
     - 하루퀴즈 표준 4단계 릴리스 파이프라인(버전 메타데이터 무캐시 서빙 ➔ 시작/복귀 시 버전 감지 `checkAppVersionUpdate` ➔ 무한루프 방지 캐시 소거 및 강제 갱신 `forcePageReload` ➔ 업데이트 보고 모달 `modalWhatsNew` 자동 팝업)을 필수로 구현하여 구버전 고착 방지 및 개선 내역 투명 전달.
+17. **모바일 팝업·바텀시트 하단 잘림 방지 및 뷰포트 반응형 보장 원칙 (Mobile Zero-Cut Modal & Viewport Responsive Standard)**:
+    - 5대 모바일 뷰포트 대응 표준(동적 뷰포트 단위 `max-height: 90dvh` 및 `safe-area-inset-bottom`, 본문 `overflow-y: auto`, 하단 핵심 액션 버튼 `position: sticky; bottom: 0`, 핀 선택 시 `scrollIntoView` 자동 스크롤, 팝업 내 지도 캔버스 `clamp(180px, 30dvh, 260px)`)을 필수로 구현하여 모바일 화면 크기 및 브라우저 주소창에 관계없이 버튼 잘림 원천 차단.
 
 ---
 
