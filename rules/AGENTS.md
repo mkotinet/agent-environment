@@ -26,17 +26,20 @@
 ---
 
 ## 3. 네트워크 및 도메인 보안 연동 및 공인 SSL 무장애 표준화 원칙 (NPM Reverse Proxy & Zero-Warning SSL)
-* **신규 서브도메인 등록 시 원스톱(One-Stop) 공인 SSL 발급 프로세스 의무화**:
-  * 신규 앱/서비스 배포 후 NPM(Nginx Proxy Manager)에 서브도메인(`*.danminlove.com`)을 등록할 때, 단순히 프록시 호스트 등록으로 끝내지 않고 **반드시 공인 Let's Encrypt 정식 SSL 인증서 발급 및 Nginx 키체인 주입까지 원스톱으로 즉시 완결**합니다.
+* **신규 앱 개발 완료 직후 시놀로지 1019+ MCP 연계 NPM 서브도메인 원스톱 자동 등록 의무화**:
+  * 신규 앱/서비스 개발 및 포테이너 스택 배포가 완료되면, 사용자가 수동으로 NPM 웹 UI에 들어가 설정하지 않도록 **시놀로지 DS1019+ Portainer Docker Exec API를 연동하여 NPM 컨테이너 내부에서 서브도메인(`*.danminlove.com`) 등록 및 공인 Let's Encrypt 정식 SSL 발급, Nginx 리로드까지 원스톱으로 즉시 자동 완결**합니다.
 * **자체 서명(Self-signed) 인증서 단독 연결 원천 금지**:
   * `*.danminlove.com` 자체 서명 와일드카드 인증서만 연결할 경우, Cloudflare를 거치지 않는 직접 접속이나 특정 모바일 브라우저(Safari, Chrome 등)에서 "연결이 비공개로 설정되어 있지 않습니다 (`NET::ERR_CERT_AUTHORITY_INVALID`)" 보안 경고가 발생하므로 이를 단독으로 남겨두지 않습니다.
-* **표준 SSL 자동 발급 및 Nginx 키체인 주입 5대 절차**:
-  1. **NPM 호스트 등록**: Forward Hostname/IP(예: `192.168.0.96`), 포트, WebSocket Support(`allow_websocket_upgrade: true`), Block Exploits 활성화.
-  2. **ACME 챌린지 경로 보장**: 해당 가상호스트(`*.conf`)에 `include conf.d/include/letsencrypt-acme-challenge.conf;` 포함 및 `trust_forwarded_proto: T` 적용.
-  3. **공인 Certbot 정식 발급 자동화**:
-     NPM 컨테이너 내부에서 `certbot certonly --webroot -w /data/letsencrypt-acme-challenge --cert-name <도메인>_official --email minkim@danminlove.com --agree-tos --no-eff-email --non-interactive -d <도메인>`을 실행하여 공인 Let's Encrypt 정식 인증서 발급.
-  4. **가상호스트 키체인 갱신 및 Nginx 무중단 리로드**:
-     `/data/nginx/proxy_host/<ID>.conf`에 정식 발급된 공인 인증서 키체인(`/etc/letsencrypt/live/<도메인>_official/fullchain.pem`)을 주입하고 `nginx -t && nginx -s reload` 실행.
+* **시놀로지 1019+ Portainer Exec 기반 NPM 서브도메인 & 공인 SSL 자동화 5대 절차**:
+  1. **NPM 컨테이너 Exec 연동**:
+     DS1019+ Portainer(Endpoint ID: `3`)의 NPM 컨테이너(`7665696692b3`, `/npm`)를 대상으로 Docker Exec API(`http://djms1.iptime.org:9000/api/endpoints/3/docker/containers/7665696692b3/exec`) 채널을 확보합니다.
+  2. **공인 Certbot 정식 발급 자동화**:
+     NPM 컨테이너 내부에서 Webroot 기반 HTTP-01 챌린지를 무인 실행하여 정식 인증서를 즉시 발급받습니다:
+     `certbot certonly --webroot -w /data/letsencrypt-acme-challenge --cert-name <앱이름>_official --email minkim@danminlove.com --agree-tos --no-eff-email --non-interactive -d <도메인>`
+  3. **Custom SSL 키체인 배치 및 SQLite DB 자동 등록**:
+     발급된 인증서를 `/data/custom_ssl/npm-<CertID>/{fullchain.pem, privkey.pem}`으로 배치하고, `/data/database.sqlite`의 `certificate` 테이블에 자동 등록(Max ID + 1)합니다.
+  4. **Proxy Host DB 등록 및 Nginx 가상호스트 생성**:
+     `/data/database.sqlite`의 `proxy_host` 테이블에 등록(도메인, 포워딩 호스트 IP/포트, `certificate_id`, `ssl_forced: 1`, `http2_support: 1`, `allow_websocket_upgrade: 1`, `block_exploits: 1`)하고, `/data/nginx/proxy_host/<HostID>.conf` 가상호스트 설정 파일을 표준 생성한 후 `nginx -t && nginx -s reload`로 무중단 적용합니다.
   5. **엄격한 공인 SSL 체인 검증 의무화**:
      작업 완료 보고 전 반드시 `curl -v https://<도메인>/` (보안 무시 `-k` 옵션 엄격히 배제) 명령어로 `SSL certificate verify ok` 및 공인 CA(ISRG / Let's Encrypt) 서명을 최종 증거 기반으로 검증한 후 사용자에게 인도합니다.
 
@@ -138,6 +141,7 @@
    * **프로덕션 수준 UI/UX 디자인 시스템 (`impeccable`, `web-design-guidelines`)**: 아마추어 AI 생성물 특유의 엉성한 디자인을 원천 배제하고, 타이포그래피 위계, 접근성(WCAG 2.1 AA+ 대비), 정교한 간격/여백, 일관된 디자인 토큰(`DESIGN.md`)을 준수합니다.
    * **자연스러운 뷰 트랜지션 (`vercel-react-view-transitions`)**: React `<ViewTransition>` 및 CSS View Transition을 적용하여 페이지/컴포넌트 전환 시 부드러운 네이티브 앱 수준의 인터랙션을 구현합니다.
    * **서버리스 런타임 & 비용 최적화 (`vercel-optimize`)**: 불필요한 서버리스 함수 호출 및 빌드 시간을 줄이고, 엣지 캐싱 및 Fast Data Transfer 비용을 최적화합니다.
+   * **모바일/PC 반응형 듀얼 최적화 & 뷰포트 공간 극대화 (`frontend-ui-engineering`, 원칙 19 연동)**: 상단 메뉴바 접기/1행 요약바 전환, 100vw × 100vh Zen 몰입형 전체화면, PC 와이드 스크린 반응형 그리드 & 단축키, 모바일 상세 필터 자동 접힘 및 사이드 패널의 슬라이드업 바텀 시트 전환을 필수로 구현합니다.
 
 6. **6단계: `agent-skills` (Addy Osmani 시니어 풀스택 엔지니어링 표준)**
    * `api-and-interface-design`: 모듈 경계 간 견고한 타입 계약과 안정적인 REST/GraphQL API를 설계합니다.
@@ -260,4 +264,31 @@
   * 특정 앱(예: `family-care`, `daily-quiz`, `nas-dashboard` 등)에서 발견된 치명적 오류 기법(예: 모바일 터치 이벤트의 캔버스 관통 방지, PWA 캐시 즉각 무효화, 전역 이벤트 핸들러 안전 바인딩 등)은 다른 앱 개발 시에도 공통 체크리스트로 적극 교차 적용합니다.
 * **4) Git 양방향 실시간 동기화 및 영구 버전 관리 (Rule 1, 2 연동)**:
   * 새로 추가되거나 보강된 `트러블슈팅.md`는 소스 코드 및 `기술레포트.md`, `제작히스토리.md`와 함께 대상 GitHub 레포지토리에 즉시 커밋 및 푸시하여 영구 보존하며, 멀티 디바이스 환경 동기화 레포지토리([agent-environment](https://github.com/mkotinet/agent-environment))에도 상시 최신 상태를 유지합니다.
+
+---
+
+## 19. 모바일/PC(데스크톱) 반응형 듀얼 최적화 및 뷰포트 공간 극대화 코드 구현 원칙 (Mobile & PC Dual Optimization & Viewport Maximization Standard)
+모든 웹 애플리케이션 및 뷰어, 대시보드, 인터랙티브 서비스 개발 시, 모바일의 협소한 세로 화면과 PC의 광활한 가로 와이드 화면의 특성을 모두 극대화하여 최상의 사용자 경험을 제공할 수 있도록 다음 **6대 모바일/PC 듀얼 최적화 코드 구현 표준**을 필수로 기본 구현합니다:
+
+* **1) 상단 메뉴바 접기/펼치기 및 1행 미니멀 요약바 표준화 (Collapsible Topbar & Compact Summary Bar)**:
+  * 복잡한 다행(Multi-row) 검색창, 필터 칩 빌더, 카테고리 선택자, 툴바 등은 모바일/PC 모두에서 본문 작업 영역(장표, 캔버스, 그리드, 리스트)의 세로 높이를 30~50% 이상 잠식하지 않도록 **상단바 접기/펼치기 토글(`#btnToggleTopbar`, 단축키 `Alt+H`)**을 의무 구현합니다.
+  * 접혔을 때는 높이 40px 내외의 슬림한 **1행 미니멀 요약 바(`#collapsedSummary`)**로 축소 전환되고, 현재 검색어/필터 상태 뱃지(`#collapsedQueryBadge`)와 원클릭 `검색창 열기/펼치기` 버튼(`#btnQuickExpand`)을 상시 노출하여 작업 맥락(Context)을 완벽히 보존합니다.
+  * 접힘/펼침 상태는 `localStorage`(`app_topbar_collapsed`)에 영속화하여 브라우저 새로고침이나 재접속 시에도 사용자가 설정한 최적 뷰포트 배치를 유지합니다.
+* **2) 100vw × 100vh Zen 몰입형 전체화면 모드 (Immersive Fullscreen / Zen Mode)**:
+  * 장표, 도면, 차트, 데이터 테이블, 코드/문서 뷰어 등 정밀 검토 및 몰입이 필요한 핵심 화면에는 브라우저 표준 Fullscreen API와 CSS `body.zen-fullscreen`을 연동한 **무방해 전체화면 모드(`#btnFullscreen`, `#btnStageFullscreen`, 단축키 `Alt+F`)**를 기본 탑재합니다.
+  * Zen 모드 활성화 시 상단 헤더, 좌측 사이드바, 우측 인스펙터/속성창 등 모든 부가 UI를 일제히 `display: none !important;`로 숨기고, 주 작업 영역(캔버스/그리드)을 **`100vw × 100vh`**로 화면 전체에 꽉 채웁니다.
+  * 화면 우측 상단에 반투명 블러 백드롭의 **플로팅 복귀 버튼(`#btnExitFullscreen`, `⤢ 전체창 닫기 (ESC)`)**을 상시 플로팅 배치하고, 키보드 `ESC` 키 리스너를 바인딩하여 0.1초 만에 안전하게 일반 화면으로 복귀할 수 있도록 보장합니다.
+* **3) PC(데스크톱) 와이드 뷰포트 및 사이드바/인스펙터 독립 제어 & 단축키 (PC Wide-Screen Ergonomics)**:
+  * **사이드바/패널 독립 토글**: 좌측 탐색 사이드바(`#btnToggleSidebar`, `[` 단축키), 우측 상세/텍스트 인스펙터(`]` 단축키)를 각각 독립적으로 접거나 펼칠 수 있도록 하여 가로 캔버스 폭을 360px 이상 추가 확보할 수 있도록 구현합니다.
+  * **와이드 스크린 그리드 반응형 (CSS Grid Dynamic Breakpoints)**: 1200px 이상(4~5열, `minmax(240px, 1fr)`), 1600px 이상(5~6열, `minmax(260px, 1fr)`) 등 데스크톱 대형 모니터의 해상도를 낭비 없이 100% 활용하도록 유연한 반응형 그리드 미디어 쿼리를 기본 탑재합니다.
+  * **생산성 키보드 단축키 (Keyboard Shortcuts)**: `Alt+H`(상단바 접기), `Alt+F`(전체화면), `[`(좌측 사이드바), `]`(우측 인스펙터), `ESC`(전체화면 해제 / 모달 닫기) 등 마우스 이동 없이 양손 키보드만으로 신속히 조작할 수 있는 전역 `keydown` 이벤트 핸들러를 필수로 구성합니다.
+* **4) 모바일 전용 레이아웃 분할 및 자동 필터 아코디언 (Mobile Compact Accordion & Auto-Fold)**:
+  * 좁은 세로 모바일 화면에서는 다수의 검색 필터, 권별 선택지, 정렬 옵션을 **'상세 필터' 아코디언(`#topbarCollapsibleFilters`, `#btnToggleFilters`)**으로 묶어 기본 접힘 상태로 로드하여, 첫 화면 진입 시 즉시 핵심 검색창과 콘텐츠 장표에 집중하도록 합니다.
+  * 모바일 환경에서 검색 버튼 터치 또는 엔터 입력 시, 모바일 가상 키보드가 닫힘과 동시에 필터 아코디언을 자동으로 축소 접기(`runSearch() ➔ updateFiltersState(true)`)하여 사용자가 수동 스크롤을 하지 않고도 검색 결과 목록을 화면 최상단에서 즉각 확인할 수 있도록 자동화합니다.
+* **5) 모바일 사이드 패널의 슬라이드업 바텀 시트 전환 (Mobile Slide-up Bottom Sheet)**:
+  * 데스크톱에서 좌/우 분할 창(Split View)으로 표시되는 상세 인스펙터, 메타데이터 정보창, OCR 텍스트 뷰 등을 모바일에서는 화면을 영구 잠식하는 가로 분할 대신 **하단 슬라이드업 바텀 시트(`@keyframes slideUpSheet`, `max-height: 55dvh;`, `position: fixed; bottom: 0;`)**로 동적 전환합니다.
+  * 캔버스나 장표 영역을 항상 시야에 확보하고, 필요할 때만 바텀 시트를 끌어올려 상세 텍스트나 조작부를 확인할 수 있도록 하여 터치 스크롤 간섭을 배제합니다.
+* **6) 터치 친화적 타깃 크기 및 동적 뷰포트 보장 (Touch Targets & Dynamic Viewport Height)**:
+  * 모바일 인터랙션 요소(버튼, 탭, 체크박스 등)는 최소 **44px × 44px** 이상의 터치 타깃(`min-height: 44px; min-width: 44px;`)과 충분한 간격을 확보하여 터치 오작동을 방지합니다.
+  * 모바일 브라우저의 가변 주소창 및 하단 툴바에 대응하기 위해 단순 `vh` 대신 **`100dvh` / `calc(100dvh - 120px)`**와 `env(safe-area-inset-*)` 환경 변수를 필수 지정합니다.
 
